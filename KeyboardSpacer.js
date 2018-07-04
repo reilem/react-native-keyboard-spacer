@@ -36,6 +36,7 @@ const defaultAnimation = {
 };
 
 export default class KeyboardSpacer extends Component {
+
   static propTypes = {
     topSpacing: PropTypes.number,
     onToggle: PropTypes.func,
@@ -72,10 +73,9 @@ export default class KeyboardSpacer extends Component {
   }
 
   updateKeyboardSpace(event) {
-    if (!event.endCoordinates) {
+    if (!event.endCoordinates || this.state.isKeyboardOpened) {
       return;
     }
-
     let animationConfig = defaultAnimation;
     if (Platform.OS === 'ios') {
       animationConfig = LayoutAnimation.create(
